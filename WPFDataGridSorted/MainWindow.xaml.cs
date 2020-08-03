@@ -74,8 +74,15 @@ namespace WPFDataGridSorted
                 }
                 else
                 {
+                    // Important: At the time of writing this, when SetItemStatus() is 
+                    // called below, a UIA PropertyChanged event is automatically raised,
+                    // meaning that screen readers such as Narrator are made aware of the
+                    // change and can make a related accouncement if it wants to. If the
+                    // event were not raise automatically, then an event could be raised
+                    // here by uncommenting all the commented-out the code below.
+
                     // Get the current UIA ItemStatus from the header element. ​
-                    string oldStatus = AutomationProperties.GetItemStatus(columnHeader);
+                    //string oldStatus = AutomationProperties.GetItemStatus(columnHeader);
 
                     // Set the new status based on the current sort order.
                     string newStatus = columnHeader.SortDirection.ToString();
@@ -83,17 +90,18 @@ namespace WPFDataGridSorted
                     // Now set the new UIA ItemStatus on the header element.
                     AutomationProperties.SetItemStatus(columnHeader, newStatus);
 
-                    // Having just set the new ItemStatus, raise a UIA property changed event.
+                    // If an event were not automatically raised in response to the call
+                    // to SetItemStatus(), then raise a UIA property changed event here.
                     // Note that the peer may be null here unless a UIA client app such as
                     // Narrator or the Accessibility Insights for Windows tool are running.
-                    var peer = FrameAutomationPeer.FromElement(columnHeader);
-                    if (peer != null)
-                    {
-                        peer.RaisePropertyChangedEvent(
-                            AutomationElementIdentifiers.ItemStatusProperty,
-                            oldStatus,
-                            newStatus);
-                    }
+                    //var peer = FrameAutomationPeer.FromElement(columnHeader);
+                    //if (peer != null)
+                    //{
+                    //    peer.RaisePropertyChangedEvent(
+                    //        AutomationElementIdentifiers.ItemStatusProperty,
+                    //        oldStatus,
+                    //        newStatus);
+                    //}
                 }
             }
         }
