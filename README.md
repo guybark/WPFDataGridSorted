@@ -8,6 +8,8 @@ The second image below shows the Accessibility Insights for Windows tool reporti
 
 When the Narrator screen reader encounters the column header, it will announce the current ItemStatus value. There may be a slight pause before the ItemStatus announcement. Narrator's "Read item advanced" command (CapsLock+0) can also be used to have the ItemStatus announced. If Narrator is located at the header when the sort order changes, Narrator will announce the new sort order at that time. 
 
+Note that in some cases Narrator may announce the change in state, and then announce the new state again. That duplication of announcement is not something an app builder should spend time on trying to avoid.
+
 
 ![Alt text](WPFDataGridSorted/Assets/WPFDataGrid_AIWinProperties.png?raw=true "The AIWin tool reporting the UIA properties of a column header.")
 
